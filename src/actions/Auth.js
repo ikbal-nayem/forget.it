@@ -28,9 +28,14 @@ export const userSignIn = ({email, password, setLoading}) => {
         toast.success("Login successful!")
       }
     }).catch((error)=>{
-      error.response.status === 401
-        ? toast.error("Invalid email or password", {position: "top-center"})
-        : toast.error(statusCode[error.response.status], {position: "top-center"})
+      try{
+        error.response.status === 401
+          ? toast.error("Invalid email or password", {position: "top-center"})
+          : toast.error(statusCode[error.response.status], {position: "top-center"})
+      } catch {
+        toast.error(error.message)
+        console.log(error)
+      }
     }).finally(()=>setLoading(false))
   }
 };

@@ -10,6 +10,7 @@ import { toast } from 'react-toastify';
 import statusCode from 'util/status-codes';
 import { del } from './server_actions';
 import {success, error} from 'styles/toast-style';
+import CustomScrollbars from 'util/CustomScrollbars';
 
 
 // eslint-disable-next-line
@@ -70,12 +71,14 @@ export default () => {
 
 	return (
 		<React.Fragment>
-			<div className="app-wrapper container">
-				{!loading
-					?	<Credentials credential_list={credential_list} formOpen={formOpen} handleList={handleList}/>
-					: <DataSearching text="Looking for credentials..."/>
-				}
-			</div>
+			<CustomScrollbars>
+				<div className="app-wrapper container">
+					{!loading
+						?	<Credentials credential_list={credential_list} formOpen={formOpen} handleList={handleList}/>
+						: <DataSearching text="Looking for credentials..."/>
+					}
+				</div>
+			</CustomScrollbars>
 			<Fab size="medium" className="bg-gradient text-white position-fixed animated zoomIn" onClick={formOpen} style={{bottom: 20, right: 20}}>
 				<AddIcon fontSize="large"/>
 			</Fab>

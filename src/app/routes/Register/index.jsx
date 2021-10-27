@@ -67,7 +67,7 @@ const Register = (props) => {
 
         <div className="d-flex align-items-center justify-content-center">
           <Link to="/" title="cms">
-            <img width={170} src={logo} alt="cms"/>
+            <img width={140} src={logo} alt="cms"/>
           </Link>
         </div>
 
