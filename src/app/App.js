@@ -40,7 +40,7 @@ const App = (props) => {
     if(token){
       dispatch(getUser(token))
     }
-  },[token])
+  },[token, dispatch])
 
 
   let applyTheme = createMuiTheme(cyanTheme);

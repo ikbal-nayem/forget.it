@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { post } from "./server_actions";
 
 
+// eslint-disable-next-line
 export default () => {
   const [loading, setLoading] = React.useState(false)
   const { register, handleSubmit, setError, reset, formState: { errors } } = useForm({

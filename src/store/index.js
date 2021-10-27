@@ -11,8 +11,7 @@ const middlewares = [thunk, routeMiddleware];
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export default function configureStore(initialState) {
-  const store = createStore(reducers(history), initialState,
-    composeEnhancers(applyMiddleware(...middlewares)));
+  const store = createStore(reducers(history), initialState, composeEnhancers(applyMiddleware(...middlewares)));
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers
     module.hot.accept('../reducers/index', () => {

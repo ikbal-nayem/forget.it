@@ -41,7 +41,7 @@ export default function CredentialForm({handleList, handleClose, open, update_da
 
   React.useEffect(()=>{
     reset({...update_data.current})
-  }, [open, update_data])
+  }, [open, update_data, reset])
 
   const handleTitle = React.useCallback((e)=>{
     const value = getValues()
@@ -49,7 +49,7 @@ export default function CredentialForm({handleList, handleClose, open, update_da
       getSiteTitle(e.target.value)
         .then(data => setValue('title', data))
     }
-  }, [setValue, getSiteTitle])
+  }, [setValue, getValues])
 
 
   return (

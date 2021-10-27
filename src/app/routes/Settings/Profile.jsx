@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { USER_DATA } from "constants/ActionTypes";
 
 
+// eslint-disable-next-line
 export default () => {
   const [loading, setLoading] = React.useState(false)
   const {authUser} = useSelector(({auth}) => auth)

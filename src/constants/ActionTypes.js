@@ -9,11 +9,14 @@ export const SIGNOUT_USER = 'signout_user';
 export const SIGNOUT_USER_SUCCESS = 'signout_user_success';
 export const INIT_URL = 'init_url';
 export const USER_DATA = 'user_data';
+
 export const USER_TOKEN_SET = 'user_token_set';
-
-
 export const FETCH_ERROR = 'user_token_set';
 export const FETCH_START = 'user_token_set';
 export const FETCH_SUCCESS = 'user_token_set';
 export const HIDE_MESSAGE = 'user_token_set';
 export const SHOW_MESSAGE = 'user_token_set';
+
+
+
+export const SEARCH_QUERY = 'search_query';

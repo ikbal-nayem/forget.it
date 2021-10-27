@@ -8,6 +8,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import {Edit, DeleteForever} from '@material-ui/icons';
 import homeStyles from './style';
 import { Grid } from '@material-ui/core';
+import {ReactComponent as EmptyList} from 'assets/images/empty.svg';
 
 
 const getHost = (url)=> new URL(url).host
@@ -18,6 +19,15 @@ export default function Credentials({credential_list, handleList, formOpen}) {
 
   const handleChange = (panel) => (_, isExpanded) => setExpanded(isExpanded ? panel : false);
 
+
+  if(credential_list.length === 0){
+    return(
+      <div className="d-flex flex-column align-items-center">
+        <EmptyList height={120} width={120} className="mb-3 mt-5"/>
+        <h2 className="text-gradient animated slideInUp animation-duration-3">No credentials found</h2>
+      </div>
+    )
+  }
   
   return (
     <div className={classes.root}>

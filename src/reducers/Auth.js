@@ -6,9 +6,9 @@ const INIT_STATE = {
   authUser: null
 };
 
+// eslint-disable-next-line
 export default (state = INIT_STATE, action) => {
   switch (action.type) {
-
 
     case INIT_URL: {
       return {...state, initURL: action.payload};

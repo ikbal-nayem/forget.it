@@ -6,6 +6,7 @@ import asyncComponent from "util/asyncComponent";
 import settingStyle from './style';
 
 
+// eslint-disable-next-line
 export default ({match, location}) => {
   const classes = settingStyle()
   const {authUser} = useSelector(({auth}) => auth)
