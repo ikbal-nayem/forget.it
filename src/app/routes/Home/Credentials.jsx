@@ -60,22 +60,28 @@ export default function Credentials({credential_list, handleList, formOpen}) {
 
 const CredentialDetails = ({credential, handleList, formOpen})=>{
   const [show, setShow] = React.useState(false)
+  const date_time = new Date(credential.added_on)
+  let date = date_time.toDateString().split(' ')
+
   return(
     <Grid container spacing={2}>
       <Grid item>
         <img
           width={80}
           height={80}
-          alt="logo" 
+          alt="logo"
           className="rounded"
           src={`https://besticon-demo.herokuapp.com/icon?url=${credential.url}&size=64..128..256&fallback_icon_color=fff`} />
       </Grid>
       <Grid item xs={12} sm container>
         <Grid item xs container direction="column" spacing={2}>
           <Grid item xs>
-            <Typography gutterBottom variant="subtitle1">
-              <Link href={credential.url} target="_blank">{getHost(credential.url)}</Link>
-            </Typography>
+            <div className="d-flex justify-content-between">
+              <Typography gutterBottom variant="subtitle1">
+                <Link href={credential.url} target="_blank">{getHost(credential.url)}</Link>
+              </Typography>
+              <small className="text-muted text-center">{date[1]} {date[2]}, {date[3]}<br />{date_time.toLocaleTimeString()}</small>
+            </div>
             <Typography variant="body2" gutterBottom>
               Username - <strong className="border rounded px-1">{credential.username}</strong>
             </Typography>
@@ -86,10 +92,10 @@ const CredentialDetails = ({credential, handleList, formOpen})=>{
         </Grid>
         <Grid item>
           <div className="d-flex flex-column">
-            <IconButton color="primary" onClick={()=>formOpen(credential)}>
+            <IconButton size="small" color="primary" onClick={()=>formOpen(credential)}>
               <Edit/>
             </IconButton>
-            <IconButton onClick={()=>handleList('DELETE', credential)}>
+            <IconButton size="small" onClick={()=>handleList('DELETE', credential)}>
               <DeleteForever color="error"/>
             </IconButton>
           </div>

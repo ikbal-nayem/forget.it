@@ -30,7 +30,9 @@ export default () => {
 					setCredentialList(resp.data)
 				}
 			})
-			.catch(error=>toast(statusCode[error.response.status]))
+			.catch(error=>{
+				toast(error.response ? statusCode[error.response.status] : error.message)
+			})
 			.finally(()=>setLoading(false))
 	},[])
 
