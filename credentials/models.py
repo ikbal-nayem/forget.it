@@ -14,7 +14,7 @@ class CredentialURL(models.Model):
 
 class Credentials(models.Model):
   credential_url = models.ForeignKey(CredentialURL, on_delete=models.CASCADE, related_name="credentials")
-  username = models.CharField(max_length=50)
-  pswd = models.CharField(max_length=100)
+  username = models.CharField(max_length=50, null=True, blank=True)
+  pswd = models.CharField(max_length=100, null=True, blank=True)
   added_on = models.DateTimeField(auto_now_add=True)
   edited_on = models.DateTimeField(auto_now=True)
