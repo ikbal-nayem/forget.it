@@ -121,8 +121,8 @@ const CredentialRow = React.memo(({cre, handleList})=>{
       }
       
       <TableCell className="border-0 p-0" style={{width: 10}}>
-        <IconButton size="small" onClick={editing_mode?onSubmit:handleMenu}>
-          {editing_mode?<CheckRounded fontSize="small" color="secondary"/>:<MoreVert fontSize="small"/>}
+        <IconButton size="small" className="bg-success text-white" onClick={editing_mode?onSubmit:handleMenu}>
+          {editing_mode?<CheckRounded fontSize="small"/>:<MoreVert fontSize="small"/>}
         </IconButton>
         <Menu
           anchorEl={open_menu}

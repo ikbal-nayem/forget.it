@@ -1,7 +1,7 @@
 {
   "name": "forget.it",
   "homepage": "https://ikbal-nayem.github.io/forget.it",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "dependencies": {
     "@babel/runtime": "^7.7.7",

@@ -59,7 +59,7 @@ export default function CredentialForm({handleList, handleClose, open, update_da
       onClose={handleClose}
       aria-labelledby="credential-form"
       fullWidth
-      maxWidth="md"
+      maxWidth="sm"
     >
       <DialogTitle id="credential-form" className="text-center">{update_data.current.id?'Update':'Add New'} Credential</DialogTitle>
       <form onSubmit={handleSubmit(onSubmit)}>
