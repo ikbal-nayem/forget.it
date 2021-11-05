@@ -1,7 +1,7 @@
 import {INIT_URL, SIGNOUT_USER_SUCCESS, USER_DATA, USER_TOKEN_SET} from "../constants/ActionTypes";
 
 const INIT_STATE = {
-  token: JSON.parse(localStorage.getItem('token')),
+  token: JSON.parse(sessionStorage.getItem('token')),
   initURL: '',
   authUser: null
 };

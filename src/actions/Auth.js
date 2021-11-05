@@ -22,7 +22,7 @@ export const userSignIn = ({email, password, setLoading}) => {
       }
     ).then(({data}) => {
       if (data.success) {
-        localStorage.setItem("token", JSON.stringify(data.token));
+        sessionStorage.setItem("token", JSON.stringify(data.token));
         axios.defaults.headers.common['Authorization'] = "Bearer " + data.token;
         dispatch({type: USER_TOKEN_SET, payload: data.token});
         toast.success("Login successful!")
@@ -59,7 +59,7 @@ export const getUser = (token) => {
 
 export const userSignOut = () => {
   return (dispatch) => {
-    localStorage.removeItem("token");
+    sessionStorage.removeItem("token");
     dispatch({type: SIGNOUT_USER_SUCCESS});
   }
 };

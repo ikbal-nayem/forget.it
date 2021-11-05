@@ -67,6 +67,7 @@ function CredentialsTable({credentials}) {
 
 const CredentialRow = React.memo(({cre, handleList})=>{
   const [show, setShow] = React.useState(false)
+  const [updating, setUpdating] = React.useState(false)
   const [open_menu, setOpenMenu] = React.useState(null)
   const [editing_mode, setEditingMode] = React.useState(false)
   const { register, formState: { errors }, handleSubmit } = useForm({
@@ -77,11 +78,13 @@ const CredentialRow = React.memo(({cre, handleList})=>{
   const handleClose = () => setOpenMenu(null);
 
   const onSubmit = handleSubmit((data)=>{
+    setUpdating(true)
     let new_data = {...cre, ...data}
     put('update_urlwise_credential', new_data)
       .then(resp => {
           handleList('UPDATE', resp)
         })
+      .finally(()=>setUpdating(false))
     setEditingMode(false)
     setOpenMenu(null)
   })
@@ -96,6 +99,7 @@ const CredentialRow = React.memo(({cre, handleList})=>{
                 size="small"
                 fullWidth
                 autoFocus
+                disabled={updating}
                 error={!!errors.username}
                 inputProps={{...register("username", { required: true })}}
                 onKeyPress={e=>e.key ==='Enter' && onSubmit(e)}
@@ -106,6 +110,7 @@ const CredentialRow = React.memo(({cre, handleList})=>{
                 placeholder="Password"
                 size="small"
                 fullWidth
+                disabled={updating}
                 error={!!errors.pswd}
                 inputProps={{...register("pswd", { required: true })}}
                 onKeyPress={e=>e.key ==='Enter' && onSubmit(e)}
@@ -121,7 +126,7 @@ const CredentialRow = React.memo(({cre, handleList})=>{
       }
       
       <TableCell className="border-0 p-0" style={{width: 10}}>
-        <IconButton size="small" className="bg-success text-white" onClick={editing_mode?onSubmit:handleMenu}>
+        <IconButton size="small" className={editing_mode?'bg-success text-white':'text-dark'} disabled={updating} onClick={editing_mode?onSubmit:handleMenu}>
           {editing_mode?<CheckRounded fontSize="small"/>:<MoreVert fontSize="small"/>}
         </IconButton>
         <Menu
