@@ -1,3 +1,4 @@
+import base64
 from rest_framework import viewsets
 from .serializers import CredentialURLSerializer, CredentialsSerializer
 from .models import CredentialURL, Credentials
@@ -30,3 +31,13 @@ class CredentialsViewset(viewsets.ModelViewSet):
     user_credentials = Credentials.objects.filter(credential_url__user = self.request.user)
     user_credentials = user_credentials.filter(credential_url=url_id) if url_id else user_credentials
     return user_credentials
+  
+  def create(self, request, *args, **kwargs):
+    if request.user.encrypt_pswds:
+      request.data['pswd'] = str(base64.b64encode(request.data.get('pswd').encode()), 'utf-8')
+    return super().create(request, *args, **kwargs)
+  
+  def update(self, request, *args, **kwargs):
+    if request.user.encrypt_pswds:
+      request.data['pswd'] = str(base64.b64encode(request.data.get('pswd').encode()), 'utf-8')
+    return super().update(request, *args, **kwargs)

@@ -8,7 +8,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
   class Meta:
     model = get_user_model()
-    fields = ['first_name', 'last_name', 'username', 'email', 'email_verified', 'password', 'conf_password']
+    fields = ['first_name', 'last_name', 'username', 'email', 'email_verified', 'encrypt_pswds', 'password', 'conf_password']
     read_only_fields = ['email_verified']
   
   def create(self, validated_data):

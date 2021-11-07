@@ -36,6 +36,7 @@ class CustomUsers(AbstractBaseUser, PermissionsMixin):
   join_date = models.DateTimeField(auto_now_add=True)
   last_login = models.DateTimeField(auto_now=True)
   email_verified = models.BooleanField(default=False, help_text=_("Email should be verified."))
+  encrypt_pswds = models.BooleanField(default=True)
   is_active = models.BooleanField(default=True)
   is_admin = models.BooleanField(default=False)
   is_staff = models.BooleanField(default=False)
