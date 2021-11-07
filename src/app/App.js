@@ -1,8 +1,6 @@
 import React, {useEffect} from "react";
 import {createMuiTheme} from "@material-ui/core/styles";
 import {ThemeProvider} from "@material-ui/styles";
-import MomentUtils from "@date-io/moment";
-import {MuiPickersUtilsProvider} from "material-ui-pickers";
 import {Redirect, Route, Switch} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import "assets/vendors/style";
@@ -57,16 +55,14 @@ const App = (props) => {
 
   return (
     <ThemeProvider theme={applyTheme}>
-      <MuiPickersUtilsProvider utils={MomentUtils}>
-        <div className="flex-grow-1">
-          <Switch>
-            <RestrictedRoute path={`${match.url}app`} token={token} component={AdminRoutes}/>
-            <Route path='/login' component={Login}/>
-            <Route path='/register' component={Register}/>
-          </Switch>
-        </div>
-        <ToastContainer theme="dark"/>
-      </MuiPickersUtilsProvider>
+      <div className="flex-grow-1">
+        <Switch>
+          <RestrictedRoute path={`${match.url}app`} token={token} component={AdminRoutes}/>
+          <Route path='/login' component={Login}/>
+          <Route path='/register' component={Register}/>
+        </Switch>
+      </div>
+      <ToastContainer theme="dark"/>
     </ThemeProvider>
   );
 };
