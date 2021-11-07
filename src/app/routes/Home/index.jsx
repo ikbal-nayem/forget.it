@@ -30,7 +30,9 @@ export default () => {
 					setCredentialList(resp.data)
 				}
 			})
-			.catch(error=>toast(statusCode[error.response.status]))
+			.catch(error=>{
+				toast(error.response ? statusCode[error.response.status] : error.message)
+			})
 			.finally(()=>setLoading(false))
 	},[])
 
@@ -54,7 +56,7 @@ export default () => {
 			const t_id = toast.loading('Deleting credential...')
 			del('delete_credential', data.id)
 				.then(_ => {
-					toast.update(t_id, success('Credential deleted.'))
+					toast.update(t_id, success('Credential URL deleted!'))
 					credentials.current = [...credential_list.filter(val => val.id !== data.id)]
 					setCredentialList(credentials.current)
 				})

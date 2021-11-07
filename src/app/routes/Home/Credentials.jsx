@@ -1,13 +1,8 @@
 import React from 'react';
-import {IconButton, Link} from '@material-ui/core';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import {Edit, DeleteForever} from '@material-ui/icons';
+import {IconButton, Link, Grid, Accordion, Typography, AccordionDetails, AccordionSummary} from '@material-ui/core';
+import {Edit, DeleteForever, ExpandMore} from '@material-ui/icons';
+import CredentialsTable from 'components/Table/CredentialsTable';
 import homeStyles from './style';
-import { Grid } from '@material-ui/core';
 import {ReactComponent as EmptyList} from 'assets/images/empty.svg';
 
 
@@ -34,7 +29,7 @@ export default function Credentials({credential_list, handleList, formOpen}) {
       {credential_list.map((cre, i)=>(
         <Accordion key={cre.id} expanded={expanded === `panel${i}`} onChange={handleChange(`panel${i}`)}>
           <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
+            expandIcon={<ExpandMore />}
             aria-controls="panel1bh-content"
           >
             {expanded !== `panel${i}` &&
@@ -58,49 +53,37 @@ export default function Credentials({credential_list, handleList, formOpen}) {
 }
 
 
-const CredentialDetails = ({credential, handleList, formOpen})=>{
-  const [show, setShow] = React.useState(false)
-  const date_time = new Date(credential.added_on)
-  let date = date_time?.toUTCString().split(' ')
-
+const CredentialDetails = React.memo(({credential, handleList, formOpen})=>{
   return(
-    <Grid container spacing={2}>
+    <Grid container justify="center" spacing={2}>
       <Grid item>
         <img
           width={80}
           height={80}
-          alt="logo" 
+          alt="logo"
           className="rounded"
           src={`https://besticon-demo.herokuapp.com/icon?url=${credential.url}&size=64..128..256&fallback_icon_color=fff`} />
       </Grid>
       <Grid item xs={12} sm container>
-        <Grid item xs container direction="column" spacing={2}>
-          <Grid item xs>
-            <div className="d-flex justify-content-between">
-              <Typography gutterBottom variant="subtitle1">
-                <Link href={credential.url} target="_blank">{getHost(credential.url)}</Link>
-              </Typography>
-              <small className="text-muted text-center">{date[1]} {date[2]}, {date[3]}<br/>{date_time.toLocaleTimeString()}</small>
-            </div>
-            <Typography variant="body2" gutterBottom>
-              Username - <strong className="border rounded px-1">{credential.username}</strong>
-            </Typography>
-            <Typography variant="body2" color="textSecondary">
-              Password - <strong className="border rounded px-1" onDoubleClick={()=>setShow(!show)}>{show?credential.pswd:'########'}</strong>
+        <Grid item xs={12} container justify="space-between">
+          <Grid item xs={8} className="text-truncate">
+            <Typography gutterBottom variant="subtitle1">
+              <Link className="text-gradient" href={credential.url} target="_blank">
+                {getHost(credential.url)}
+              </Link>
             </Typography>
           </Grid>
-        </Grid>
-        <Grid item>
-          <div className="d-flex flex-column">
-            <IconButton color="primary" onClick={()=>formOpen(credential)}>
-              <Edit/>
+          <Grid item>
+            <IconButton size="small" onClick={()=>formOpen(credential)}>
+              <Edit fontSize="small"/>
             </IconButton>
-            <IconButton onClick={()=>handleList('DELETE', credential)}>
-              <DeleteForever color="error"/>
+            <IconButton size="small" onClick={()=>handleList('DELETE', credential)}>
+              <DeleteForever fontSize="small" color="error"/>
             </IconButton>
-          </div>
+          </Grid>
         </Grid>
+        <CredentialsTable credentials={credential.credentials}/>
       </Grid>
     </Grid>
   )
-}
+})

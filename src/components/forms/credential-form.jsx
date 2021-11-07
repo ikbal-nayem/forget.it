@@ -58,6 +58,8 @@ export default function CredentialForm({handleList, handleClose, open, update_da
       TransitionComponent={Transition}
       onClose={handleClose}
       aria-labelledby="credential-form"
+      fullWidth
+      maxWidth="sm"
     >
       <DialogTitle id="credential-form" className="text-center">{update_data.current.id?'Update':'Add New'} Credential</DialogTitle>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -87,7 +89,7 @@ export default function CredentialForm({handleList, handleClose, open, update_da
                 label="Website URL"
                 size="small"
                 fullWidth
-                placeholder="www.example.com"
+                placeholder="http://example.com"
                 type="url"
                 margin="normal"
                 required
@@ -102,38 +104,40 @@ export default function CredentialForm({handleList, handleClose, open, update_da
               />
             </div>
           </div>
-          <div className="form-row">
-            <div className="col-6">
-              <TextField
-                label="Username"
-                size="small"
-                margin="normal"
-                fullWidth
-                required
-                disabled={saving}
-                error={!!errors.username}
-                inputProps={{...register("username", { required: true }), required: ''}}
-                InputProps={{
-                  endAdornment: <InputAdornment position="end">{<AssignmentInd/>}</InputAdornment>,
-                }}
-              />
+          {!update_data.current.id &&
+            <div className="form-row">
+              <div className="col-sm-6 col-12">
+                <TextField
+                  label="Username"
+                  size="small"
+                  margin="normal"
+                  fullWidth
+                  required
+                  disabled={saving}
+                  error={!!errors.username}
+                  inputProps={{...register("username", { required: true }), required: ''}}
+                  InputProps={{
+                    endAdornment: <InputAdornment position="end">{<AssignmentInd/>}</InputAdornment>,
+                  }}
+                />
+              </div>
+              <div className="col-sm-6 col-12">
+                <TextField
+                  label="Password"
+                  size="small"
+                  margin="normal"
+                  fullWidth
+                  required
+                  disabled={saving}
+                  error={!!errors.pswd}
+                  inputProps={{...register("pswd", { required: true }), required: ''}}
+                  InputProps={{
+                    endAdornment: <InputAdornment position="end"><VpnKey/></InputAdornment>,
+                  }}
+                />
+              </div>
             </div>
-            <div className="col-6">
-              <TextField
-                label="Password"
-                size="small"
-                margin="normal"
-                fullWidth
-                required
-                disabled={saving}
-                error={!!errors.pswd}
-                inputProps={{...register("pswd", { required: true }), required: ''}}
-                InputProps={{
-                  endAdornment: <InputAdornment position="end"><VpnKey/></InputAdornment>,
-                }}
-              />
-            </div>
-          </div>
+          }
         </DialogContent>
         <DialogActions className="justify-content-center">
           <Button onClick={handleClose} size="small" color="primary" disabled={saving}>

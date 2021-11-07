@@ -39,8 +39,8 @@ export default ({match, location}) => {
                 <div className="col-sm-8">
                   <Switch>
                     <Redirect exact from={match.url} to={`${match.url}/profile`}/>
-                    <Route path={`${match.url}/profile`} component={asyncComponent(() => import('./Profile'))}/>
-                    <Route path={`${match.url}/security`} component={asyncComponent(() => import('./Security'))}/>
+                    <Route path={`${match.url}/profile`} component={asyncComponent(() => import('../../../components/forms/Profile'))}/>
+                    <Route path={`${match.url}/security`} component={asyncComponent(() => import('../../../components/forms/Security'))}/>
                   </Switch>
                 </div>
               </div>
