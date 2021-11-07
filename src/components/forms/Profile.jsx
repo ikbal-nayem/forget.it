@@ -1,9 +1,9 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { TextField, Button } from "@material-ui/core";
+import { TextField, Button, FormControlLabel, Switch } from "@material-ui/core";
 import Alert from '@material-ui/lab/Alert';
-import { useForm } from "react-hook-form";
-import { patch } from "./server_actions";
+import { useForm, Controller } from "react-hook-form";
+import { patch } from "../../app/routes/Settings/server_actions";
 import { toast } from "react-toastify";
 import { USER_DATA } from "constants/ActionTypes";
 
@@ -13,7 +13,7 @@ export default () => {
   const [loading, setLoading] = React.useState(false)
   const {authUser} = useSelector(({auth}) => auth)
   const dispatch = useDispatch();
-  const { register, handleSubmit, setError, formState: { errors } } = useForm({
+  const { register, control, handleSubmit, setError, formState: { errors } } = useForm({
     mode: 'onChange',
     defaultValues: authUser
   });
@@ -43,7 +43,7 @@ export default () => {
       <h3 className="mb-3 pb-2 border-bottom text-center">User Information</h3>
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
         <div className="form-row">
-          <div className="col-6">
+          <div className="col-sm-6">
             <TextField
               label="First Name"
               fullWidth
@@ -56,7 +56,7 @@ export default () => {
               inputProps={{ ...register("first_name", { required: true }) }}
             />
           </div>
-          <div className="col-6">
+          <div className="col-sm-6">
             <TextField
               label="Last Name"
               fullWidth
@@ -93,10 +93,26 @@ export default () => {
               inputProps={{ ...register("email", { required: true }) }}
             />
           </div>
-          {!authUser.email_verified &&
-            <Alert className="w-100 py-0" severity="warning">Email is not verified! <strong>Verify now</strong></Alert>
-          }
         </div>
+        <Controller
+          control={control}
+          name="encrypt_pswds"
+          render={({field: { onChange, value, ref }}) => (
+            <FormControlLabel
+              label="Encrypt Passwords"
+              className="my-3 mx-0"
+              onChange={onChange}
+              inputRef={ref}
+              control={<Switch size="small" color="primary" checked={!!value} />}
+              labelPlacement="start"
+            />
+          )}
+        />
+
+        {!authUser.email_verified &&
+          <Alert className="w-100 py-0" severity="warning">Email is not verified! <strong>Verify now</strong></Alert>
+        }
+
         <div className="my-3 d-flex align-items-center justify-content-center">
           <Button className="bg-gradient" size="small" type="submit" variant="contained" color="primary" disabled={loading}>
             Save

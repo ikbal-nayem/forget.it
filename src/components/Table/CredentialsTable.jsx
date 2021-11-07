@@ -5,6 +5,7 @@ import AddCredential from 'components/forms/add-credential';
 import {del, put} from 'app/routes/Home/server_actions';
 import { toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
 
 
 
@@ -25,12 +26,9 @@ function CredentialsTable({credentials}) {
           }
         })
     } else if(action==='UPDATE'){
-      put('update_urlwise_credential', data)
-        .then(resp=>{
-          let idx = credential_list.findIndex(cre => cre.id === resp.id)
-          credential_list[idx] = resp
-          setCredentialList([...credential_list])
-        })
+      let idx = credential_list.findIndex(cre => cre.id === data.id)
+      credential_list[idx] = data
+      setCredentialList([...credential_list])
     }
   }
 
@@ -70,8 +68,9 @@ const CredentialRow = React.memo(({cre, handleList})=>{
   const [updating, setUpdating] = React.useState(false)
   const [open_menu, setOpenMenu] = React.useState(null)
   const [editing_mode, setEditingMode] = React.useState(false)
+  const {authUser} = useSelector(({auth}) => auth)
   const { register, formState: { errors }, handleSubmit } = useForm({
-    defaultValues: {username:cre.username, pswd: cre.pswd}
+    defaultValues: {username:cre.username, pswd: authUser.encrypt_pswds?atob(cre.pswd):cre.pswd}
   });
 
   const handleMenu = (event) => setOpenMenu(event.currentTarget);
@@ -82,8 +81,8 @@ const CredentialRow = React.memo(({cre, handleList})=>{
     let new_data = {...cre, ...data}
     put('update_urlwise_credential', new_data)
       .then(resp => {
-          handleList('UPDATE', resp)
-        })
+        handleList('UPDATE', resp)
+      })
       .finally(()=>setUpdating(false))
     setEditingMode(false)
     setOpenMenu(null)
@@ -120,7 +119,9 @@ const CredentialRow = React.memo(({cre, handleList})=>{
         : <React.Fragment>
             <TableCell className="px-2 text-break">{cre.username}</TableCell>
             <TableCell className="px-2 text-break">
-              <span onDoubleClick={()=>setShow(!show)}>{show?cre.pswd:'########'}</span>
+              <span onDoubleClick={()=>setShow(!show)}>
+                {show?authUser.encrypt_pswds?atob(cre.pswd):cre.pswd:'########'}
+              </span>
             </TableCell>
           </React.Fragment>
       }

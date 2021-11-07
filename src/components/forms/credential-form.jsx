@@ -89,7 +89,7 @@ export default function CredentialForm({handleList, handleClose, open, update_da
                 label="Website URL"
                 size="small"
                 fullWidth
-                placeholder="www.example.com"
+                placeholder="http://example.com"
                 type="url"
                 margin="normal"
                 required

@@ -2,7 +2,7 @@ import { TextField, Button } from "@material-ui/core";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { post } from "./server_actions";
+import { post } from "../../app/routes/Settings/server_actions";
 
 
 // eslint-disable-next-line
