@@ -1,3 +1,3 @@
 # Page URL
 
-## https://ikbal-nayem.github.io/forget.it
+## https://forgetit.glitch.me/
