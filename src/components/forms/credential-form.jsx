@@ -14,6 +14,21 @@ import { success, warning } from 'styles/toast-style';
 
 
 
+function make_url(string) {
+  let url;
+  try {
+    url = new URL(string);
+  } catch (_) {
+    return 'https://'+string; 
+  }
+  if(url.protocol === "http:" || url.protocol === "https:"){
+    return string
+  }
+  return 'https://'+url;
+}
+
+
+
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
 });
@@ -29,6 +44,7 @@ export default function CredentialForm({handleList, handleClose, open, update_da
     const id = toast.loading("Saving, Please wait...")
     const request_func = update_data.current.id ? put : post
     setSaving(true)
+    data['url'] = make_url(data.url)
     request_func(update_data.current.id?'update_credential':'add_credential', data)
       .then(resp_data => {
         toast.update(id, success('Credential saved.'));
@@ -62,7 +78,7 @@ export default function CredentialForm({handleList, handleClose, open, update_da
       maxWidth="sm"
     >
       <DialogTitle id="credential-form" className="text-center">{update_data.current.id?'Update':'Add New'} Credential</DialogTitle>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} noValidate>
         <DialogContent>
           <div className="form-row">
             <div className="col-12">
@@ -89,7 +105,7 @@ export default function CredentialForm({handleList, handleClose, open, update_da
                 label="Website URL"
                 size="small"
                 fullWidth
-                placeholder="http://example.com"
+                placeholder="https://example.com"
                 type="url"
                 margin="normal"
                 required

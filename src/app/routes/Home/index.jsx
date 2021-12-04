@@ -6,10 +6,11 @@ import Credentials from './Credentials';
 import CredentialForm from 'components/forms/credential-form';
 import axios from 'util/Api';
 import DataSearching from 'components/loading/searching';
+import Swal from 'sweetalert2'
 import { toast } from 'react-toastify';
 import statusCode from 'util/status-codes';
 import { del } from './server_actions';
-import {success, error} from 'styles/toast-style';
+import {success, error, delete_template} from 'styles/toast-style';
 import CustomScrollbars from 'util/CustomScrollbars';
 
 
@@ -53,14 +54,18 @@ export default () => {
 			credentials.current = [...credential_list]
 			setCredentialList([...credential_list])
 		} else if(action_type==='DELETE'){
-			const t_id = toast.loading('Deleting credential...')
-			del('delete_credential', data.id)
-				.then(_ => {
-					toast.update(t_id, success('Credential URL deleted!'))
-					credentials.current = [...credential_list.filter(val => val.id !== data.id)]
-					setCredentialList(credentials.current)
-				})
-				.catch(()=>toast.update(t_id, error("Credential could not delete!")))
+			Swal.fire({...delete_template}).then((result) => {
+				if (result.isConfirmed) {
+					const t_id = toast.loading('Deleting credential...')
+					del('delete_credential', data.id)
+						.then(_ => {
+							toast.update(t_id, success('Credential URL deleted!'))
+							credentials.current = [...credential_list.filter(val => val.id !== data.id)]
+							setCredentialList(credentials.current)
+						})
+						.catch(()=>toast.update(t_id, error("Credential could not delete!")))
+				}
+			})
 		}
 	}
 
@@ -81,7 +86,7 @@ export default () => {
 					}
 				</div>
 			</CustomScrollbars>
-			<Fab size="medium" className="bg-gradient text-white position-fixed animated zoomIn" onClick={formOpen} style={{bottom: 20, right: 20}}>
+			<Fab size="medium" className="bg-gradient position-fixed animated zoomIn" onClick={formOpen} style={{bottom: 20, right: 20}}>
 				<AddIcon fontSize="large"/>
 			</Fab>
 			<CredentialForm update_data={update_data} handleList={handleList} handleClose={handleClose} open={open}/>

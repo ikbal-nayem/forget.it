@@ -14,7 +14,7 @@ export default makeStyles({
   header: {
     color: '#fff',
     margin: 0,
-    fontSize: '1.6rem'
+    fontSize: '1.5rem'
   },
   user: {
     color: '#fff'

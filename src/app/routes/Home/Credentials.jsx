@@ -28,20 +28,17 @@ export default function Credentials({credential_list, handleList, formOpen}) {
     <div className={classes.root}>
       {credential_list.map((cre, i)=>(
         <Accordion key={cre.id} expanded={expanded === `panel${i}`} onChange={handleChange(`panel${i}`)}>
-          <AccordionSummary
-            expandIcon={<ExpandMore />}
-            aria-controls="panel1bh-content"
-          >
+          <AccordionSummary expandIcon={<ExpandMore />}>
             {expanded !== `panel${i}` &&
               <img 
                 width={22}
                 height={22}
                 alt="."
                 className="mr-3 rounded-circle"
-                src={`https://besticon-demo.herokuapp.com/icon?url=${cre.url}&size=16..32..64&fallback_icon_color=fff`} />
+                src={`https://www.google.com/s2/favicons?domain=${cre.url}`} />
             }
             <Typography className={`text-truncate ${classes.heading}`}>{cre.title || getHost(cre.url)}</Typography>
-            <Typography className={classes.secondaryHeading}>{getHost(cre.url)}</Typography>
+            <Typography className={`text-truncate ${classes.secondaryHeading}`}>{getHost(cre.url)}</Typography>
           </AccordionSummary>
           <AccordionDetails>
             <CredentialDetails credential={cre} handleList={handleList} formOpen={formOpen}/>
@@ -62,7 +59,7 @@ const CredentialDetails = React.memo(({credential, handleList, formOpen})=>{
           height={80}
           alt="logo"
           className="rounded"
-          src={`https://besticon-demo.herokuapp.com/icon?url=${credential.url}&size=64..128..256&fallback_icon_color=fff`} />
+          src={`https://www.google.com/s2/favicons?sz=256&domain_url=${credential.url}`} />
       </Grid>
       <Grid item xs={12} sm container>
         <Grid item xs={12} container justify="space-between">

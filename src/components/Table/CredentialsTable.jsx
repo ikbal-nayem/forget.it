@@ -1,11 +1,13 @@
 import React from 'react';
+import { useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
 import { Button, TableBody, Table, TableCell, TableHead, TableRow, IconButton, Menu, MenuItem, TextField } from '@material-ui/core';
 import {AddRounded, PersonOutlineTwoTone, VpnKeyTwoTone, CloseRounded, MoreVert, CreateTwoTone, CheckRounded} from '@material-ui/icons';
 import AddCredential from 'components/forms/add-credential';
 import {del, put} from 'app/routes/Home/server_actions';
 import { toast } from 'react-toastify';
-import { useForm } from 'react-hook-form';
-import { useSelector } from 'react-redux';
+import Swal from 'sweetalert2'
+import {delete_template} from 'styles/toast-style';
 
 
 
@@ -18,13 +20,17 @@ function CredentialsTable({credentials}) {
       setCredentialList([...credential_list, data])
       setAddOne(false)
     } else if(action==='DELETE'){
-      del('delete_urlwise_credential', data.id)
-        .then(resp => {
-          if(resp.success){
-            toast.info('Credential deleted!')
-            setCredentialList(credential_list.filter(cre => cre.id !== data.id))
-          }
-        })
+      Swal.fire({...delete_template}).then((result) =>{
+        if (result.isConfirmed){
+          del('delete_urlwise_credential', data.id)
+            .then(resp => {
+              if(resp.success){
+                toast.info('Credential deleted!')
+                setCredentialList(credential_list.filter(cre => cre.id !== data.id))
+              }
+            })
+        }
+      })
     } else if(action==='UPDATE'){
       let idx = credential_list.findIndex(cre => cre.id === data.id)
       credential_list[idx] = data
@@ -142,7 +148,7 @@ const CredentialRow = React.memo(({cre, handleList})=>{
           <MenuItem className="py-0 px-1" style={{minHeight: 'auto'}} onClick={()=>setEditingMode(true)}>
             <CreateTwoTone fontSize="small"/> Edit
           </MenuItem>
-          <MenuItem className="py-0 px-1" style={{minHeight: 'auto'}} onClick={()=>handleList('DELETE', cre)}>
+          <MenuItem className="py-0 px-1" style={{minHeight: 'auto'}} onClick={()=>{handleClose(); handleList('DELETE', cre)}}>
             <CloseRounded color="error" fontSize="small"/> Delete
           </MenuItem>
         </Menu>

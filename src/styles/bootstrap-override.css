@@ -9,6 +9,7 @@
 
 .bg-gradient {
     background: var(--primary-gradient) !important;
+    color: rgb(241, 241, 241) !important;
 }
 
 .text-gradient {
@@ -24,4 +25,8 @@
 }
 .bg-primary {
     background-color: var(--primary) !important;
+}
+
+.line-height-inherit {
+    line-height: inherit !important;
 }
