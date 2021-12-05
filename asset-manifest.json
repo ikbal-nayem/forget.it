@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/forget.it/static/css/main.7b082dd4.chunk.css",
-    "main.js": "/forget.it/static/js/main.3d1aa6b9.chunk.js",
-    "main.js.map": "/forget.it/static/js/main.3d1aa6b9.chunk.js.map",
+    "main.js": "/forget.it/static/js/main.dca675a5.chunk.js",
+    "main.js.map": "/forget.it/static/js/main.dca675a5.chunk.js.map",
     "runtime-main.js": "/forget.it/static/js/runtime-main.1b411aa8.js",
     "runtime-main.js.map": "/forget.it/static/js/runtime-main.1b411aa8.js.map",
     "static/css/2.9c959dc3.chunk.css": "/forget.it/static/css/2.9c959dc3.chunk.css",
@@ -35,6 +35,6 @@
     "static/css/2.9c959dc3.chunk.css",
     "static/js/2.311f5efb.chunk.js",
     "static/css/main.7b082dd4.chunk.css",
-    "static/js/main.3d1aa6b9.chunk.js"
+    "static/js/main.dca675a5.chunk.js"
   ]
 }
