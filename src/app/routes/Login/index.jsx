@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import {userSignIn} from 'actions/Auth';
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { useForm } from 'react-hook-form';
-import logo from '../../../assets/images/logo.svg'
+import {ReactComponent as Logo} from '../../../assets/images/logo.svg'
 import loginStyle from './style';
 
 
@@ -34,20 +34,18 @@ const SignIn = (props) => {
 
   return (
     <div className="h-100 d-flex justify-content-center align-items-center bg-gradient">
-      <div className={`${classes.root} animated slideInUpTiny animation-duration-4`}>
+      <div className={`${classes.root} animated fadeIn animation-duration-2`}>
 
-        <div className="mb-3">
+        <div className="mb-3 animated flipInX">
           <h1 className={`${classes.title} text-gradient`}>forget.it</h1>
         </div>
 
-        <div className="d-flex align-items-center justify-content-center">
-          <Link to="/" title="cms">
-            <img width={170} src={logo} alt="cms"/>
-          </Link>
+        <div className="d-flex align-items-center justify-content-center animated zoomIn animation-duration-2 animation-delay-1">
+          <Logo width={150} height="100%"/>
         </div>
 
         <div className="app-login-content">
-          <h1 className="my-2 text-center">Login</h1>
+          <h1 className="my-2 text-center animated slideInDown animation-duration-1">Login</h1>
           <div className="app-login-form">
             <form onSubmit={handleSubmit(onSubmit)} noValidate>
               <fieldset>
@@ -59,6 +57,7 @@ const SignIn = (props) => {
                       size="small"
                       variant="filled"
                       margin="dense"
+                      className="animated slideInDown animation-duration-2"
                       disabled={loading}
                       required
                       autoFocus
@@ -73,6 +72,7 @@ const SignIn = (props) => {
                       size="small"
                       variant="filled"
                       margin="dense"
+                      className="animated slideInDown animation-duration-3"
                       type="password"
                       disabled={loading}
                       required
@@ -82,11 +82,11 @@ const SignIn = (props) => {
                   </div>
                 </div>
 
-                <div className="my-3 d-flex align-items-center justify-content-center">
+                <div className="my-3 d-flex align-items-center justify-content-center animated slideInDown animation-duration-4">
                   <Link to="/register" className="text-gradient text-decoration-none mr-3">
                     Create an account
                   </Link>
-                  <Button className="bg-gradient" type="submit" variant="contained" color="primary" disabled={loading}>
+                  <Button className="bg-gradient" type="submit" size="small" variant="contained" color="primary" disabled={loading}>
                     Login
                   </Button>
                 </div>

@@ -60,7 +60,7 @@ export const del = (type, id)=>{
 
 export const getSiteTitle = (site_url)=>{
   return new Promise((resolve, reject)=>{
-    axios.get(`http://textance.herokuapp.com/title/${site_url}`)
+    axios.get(`https://textance.herokuapp.com/title/${site_url}`)
       .then(resp => resp.status === 200 ? resolve(resp.data) : reject())
       .catch((err)=>console.log(err.message))
   })

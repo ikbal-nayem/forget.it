@@ -5,7 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { useForm } from 'react-hook-form';
-import logo from '../../../assets/images/logo.svg'
+import {ReactComponent as Logo} from '../../../assets/images/logo.svg'
 import signupStyle from './style';
 import { toast } from 'react-toastify';
 import axios from 'util/Api';
@@ -59,24 +59,22 @@ const Register = (props) => {
   
   return (
     <div className="h-100 d-flex justify-content-center align-items-center bg-gradient">
-      <div className={`${classes.root} animated slideInUpTiny animation-duration-4`}>
+      <div className={`${classes.root} animated fadeIn`}>
 
-        <div className="mb-3">
+        <div className="mb-3 animated flipInX">
           <h1 className={`${classes.title} text-gradient`}>forget.it</h1>
         </div>
 
-        <div className="d-flex align-items-center justify-content-center">
-          <Link to="/" title="cms">
-            <img width={140} src={logo} alt="cms"/>
-          </Link>
+        <div className="d-flex align-items-center justify-content-center animated zoomIn animation-duration-2 animation-delay-1">
+          <Logo width={130} height="100%"/>
         </div>
 
         <div className="app-login-content">
-          <h1 className="my-2 text-center">Create an Account</h1>
+          <h1 className="my-2 text-center animated slideInDown animation-duration-1">Create an Account</h1>
           <div className="app-login-form">
             <form onSubmit={handleSubmit(onSubmit)} noValidate>
               <fieldset>
-                <div className="form-row">
+                <div className="form-row animated slideInDown animation-duration-2">
                   <div className="col-6">
                     <TextField
                       label="First Name"
@@ -105,7 +103,7 @@ const Register = (props) => {
                     />
                   </div>
                 </div>
-                <div className="form-row">
+                <div className="form-row animated slideInDown animation-duration-3">
                   <div className="col-12">
                     <TextField
                       label="Email"
@@ -120,7 +118,7 @@ const Register = (props) => {
                       inputProps={{...register("email", {required: true})}}
                     />
                   </div>
-                  <div className="col-12">
+                  <div className="col-12 animated slideInDown animation-duration-4">
                     <TextField
                       label="Password"
                       fullWidth
@@ -135,7 +133,7 @@ const Register = (props) => {
                       inputProps={{...register("password", {required: true, minLength: 8})}}
                     />
                   </div>
-                  <div className="col-12">
+                  <div className="col-12 animated slideInDown animation-duration-5">
                     <TextField
                       label="Confirm Password"
                       fullWidth
@@ -152,7 +150,7 @@ const Register = (props) => {
                   </div>
                 </div>
 
-                <div className="my-3 d-flex align-items-center justify-content-center">
+                <div className="my-3 d-flex align-items-center justify-content-center animated slideInDown animation-duration-6">
                   <Link to="/login" className="text-gradient text-decoration-none mr-3">
                     Already have an account
                   </Link>
