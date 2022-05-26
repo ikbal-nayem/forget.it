@@ -8,6 +8,7 @@ import {del, put} from 'app/routes/Home/server_actions';
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2'
 import {delete_template} from 'styles/toast-style';
+import { copy } from 'util/copyToClipboard';
 
 
 
@@ -126,8 +127,8 @@ const CredentialRow = React.memo(({cre, handleList})=>{
             </TableCell>
           </React.Fragment>
         : <React.Fragment>
-            <TableCell className="px-2 text-break">{cre.username}</TableCell>
-            <TableCell className="px-2 text-break">
+            <TableCell className="px-2 text-break" onClick={()=>copy(cre.username)}>{cre.username}</TableCell>
+            <TableCell className="px-2 text-break" onClick={()=>copy(pswd)}>
               <span onDoubleClick={()=>setShow(!show)}>
                 {show?pswd:'########'}
               </span>
